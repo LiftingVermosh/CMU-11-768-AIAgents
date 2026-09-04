@@ -1,4 +1,6 @@
 import asyncio
+import logging
+import shlex
 import time
 from pathlib import PurePath
 from typing import Any
@@ -7,6 +9,8 @@ import modal
 from swerex.deployment.modal import ModalDeployment
 from swerex.runtime.abstract import Command
 from swerex.runtime.remote import RemoteRuntime
+
+logger = logging.getLogger(__name__)
 
 
 def _tls_port_configuration(
@@ -104,6 +108,7 @@ class Environment:
         self,
         image: "str | PurePath | modal.Image" = "python:3.12",
         cwd: str = "/",
+        conda_env: str | None = None,
         startup_timeout: float = 600,
         runtime_timeout: float = 600,
         deployment_timeout: float = 600,
@@ -118,6 +123,10 @@ class Environment:
                 `assignment.utils.image.build_testbed_image`, which is the only
                 way to pass a credential to a private clone.
             cwd: Working directory for commands that do not specify one.
+            conda_env: If set, prepend that conda environment's `bin` directory
+                to `PATH` for every shell command, so a bare `python` resolves
+                inside the environment. SWE-bench images install the repository
+                under test into a conda env but never activate it.
             startup_timeout: Seconds to wait for the SWE-ReX runtime to come up.
             runtime_timeout: Seconds a single command may run before timing out.
             deployment_timeout: Seconds the sandbox may stay alive before Modal
@@ -129,6 +138,7 @@ class Environment:
                 encrypted port forwarding.
         """
         self.cwd = cwd
+        self._conda_env_bin: str | None = None
         self.deployment = AssignmentModalDeployment(
             image=image,
             startup_timeout=startup_timeout,
@@ -149,6 +159,20 @@ class Environment:
         self.system, self.release, self.version, self.machine = self.execute(
             "uname -s; uname -r; uname -v; uname -m"
         )["output"].splitlines()
+
+        if conda_env is not None:
+            # Same layout the SWE-bench harness grades against: the repository
+            # under test lives in /opt/miniconda3/envs/<name>.
+            candidate = f"/opt/miniconda3/envs/{conda_env}/bin"
+            probe = self.execute(f"test -x {candidate}/python")
+            if probe["returncode"] == 0:
+                self._conda_env_bin = candidate
+            else:
+                logger.warning(
+                    "conda env %r not found at %s; shell commands keep the image PATH",
+                    conda_env,
+                    candidate,
+                )
 
     def execute(
         self,
@@ -200,6 +224,21 @@ class Environment:
             arguments["cwd"] = cwd
         # A cwd from the caller wins; otherwise the environment's default applies.
         arguments.setdefault("cwd", self.cwd)
+
+        # Activate the conda env for shell commands by shadowing PATH with the
+        # env's bin dir first; a bare `python` then hits the testbed interpreter.
+        # argv commands (shell=False) are left untouched because no real caller
+        # of conda_env uses them, and rewriting them would need the full base env.
+        if self._conda_env_bin is not None and shell:
+            command_text = (
+                command
+                if isinstance(command, str)
+                else " ".join(shlex.quote(str(part)) for part in command)
+            )
+            arguments["command"] = (
+                f"export PATH={shlex.quote(self._conda_env_bin)}:$PATH\n"
+                f"{command_text}"
+            )
 
         try:
             result = asyncio.run(self.deployment.runtime.execute(Command(**arguments)))

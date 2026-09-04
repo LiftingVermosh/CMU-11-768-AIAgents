@@ -30,10 +30,20 @@ DEFAULT_COMPACTION_KEEP_RECENT_STEPS = 1
 DEFAULT_COMPACTION_MAX_TOKENS = 1_200
 MAX_OBSERVATION_CHARS = 10_000
 
-# TODO(Part 2): Write instructions that make the model produce concise working
-# memory for a software agent. The prompt should preserve concrete progress,
-# failures, test results, constraints, and next steps without copying raw output.
-COMPACTION_SYSTEM_PROMPT = ""
+# Sent to the model as the final turn of the compaction request, right after the
+# history being compressed. It asks for a concise factual working memory that
+# would let a fresh run resume from the summary plus the retained recent step.
+COMPACTION_SYSTEM_PROMPT = (
+    "Rewrite the task and action history above as a concise working memory that "
+    "a fresh run could continue from, given only this summary and the most "
+    "recent step still shown. Be factual and concrete. Keep, where present: the "
+    "objective and constraints; files read or edited and the commands that "
+    "matter; changes made and their concrete results; approaches that failed "
+    "and why; tests run and their outcomes; open blockers; and the next action. "
+    "Do not copy commands or tool output verbatim; condense them to the facts "
+    "needed later. Omit reasoning that no longer matters. Return only the "
+    "summary text."
+)
 
 
 class StepLimitError(Exception):
@@ -322,10 +332,24 @@ class Agent:
         # messages verbatim and at least the latest complete assistant action
         # with all linked tool observations. The resulting summary should change
         # what `build_prompt` emits, and reduce the length of the prompt.
+        
+        # 注意到 (这该死的注意力) self.messages 的结构是交替的 —— assistant(可能带 tool_calls) -> 若干个 tool(每个带 tool_call_id) -> 下一个 assistant... 
+        # 每个回合从一条 assistant 消息开始，到它带出的 tool 观察结束。
+        # NOTE: 所以边界应该放在 assistant 消息上
+        assistant_idx = [i for i, m in enumerate(self.messages) if m.get("role") == "assistant"]
+        n = len(assistant_idx)
+        k = self.compaction_keep_recent_steps          # 要保留的最近回合数
+        boundary = assistant_idx[n - k]                # 保留段(后缀)的起点
 
-        raise NotImplementedError
+        old_prefix  = self.messages[:boundary]          # 要交给模型总结的部分
+        recent_tail = self.messages[boundary:]          # 原样保留的部分
 
-        compaction_prompt = []
+        compaction_prompt = [
+            {"role": "system", "content": self.system_prompt},  # 压缩 Prompt
+            {"role": "user",   "content": self.task_prompt},          # 任务文本
+        ] + old_prefix + [
+            {"role": "user", "content": COMPACTION_SYSTEM_PROMPT}
+        ]
 
         ### Do not modify this section ###
         compaction_response = self.client.chat.completions.create(
@@ -334,6 +358,13 @@ class Agent:
             reasoning_effort="medium",
             max_completion_tokens=self.compaction_max_tokens,
         )
+
+        ### 看来我不得不改（奉化口音） ###
+        summary = compaction_response.choices[0].message.content
+
+        self.messages = [
+            {"role": "user", "content": f"<working_memory>{summary}</working_memory>"},
+        ] + recent_tail
 
         return compaction_prompt, compaction_response.model_dump(mode="json")
         ##################################
