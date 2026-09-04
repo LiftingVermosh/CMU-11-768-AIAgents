@@ -11,6 +11,9 @@ import json
 import logging
 import math
 import os
+
+import yaml
+
 from pathlib import Path
 from typing import Any
 
@@ -152,6 +155,7 @@ class Agent:
 
         # TODO(1.1.a): Add machinery to maintain agent state as it takes actions
         # and observes the results.
+        self.messages: list[dict[str, Any]] = []
 
     def load_skills(self, skills_path: Path) -> dict[str, dict[str, str]]:
         """Load the skill folders exposed to this agent."""
@@ -164,7 +168,50 @@ class Agent:
         # ``content`` of the skill file for ``invoke_skill``. Reject duplicate
         # names and malformed or missing frontmatter with a clear
         # ``ValueError``.
-        raise NotImplementedError
+        if not skills_path.is_dir():
+            raise ValueError(f"{skills_path}: is not a dir")
+
+        skills: dict[str, dict[str, str]] = {}
+
+        for child in sorted(skills_path.iterdir()): # 遍历目录
+            if not child.is_dir():
+                continue
+
+            # find md file
+            md_files = [p for p in child.iterdir() if p.name == "SKILL.md"]
+            if len(md_files) != 1:
+                raise ValueError(f"{child}: expected exactly one SKILL.md")
+
+            # raw text
+            text = md_files[0].read_text(encoding="utf-8")
+            if not text.startswith("---"):
+                raise ValueError(f"{child}: missing YAML frontmatter")
+
+            # Split
+            parts = text.split("---", 2)
+            if len(parts) < 3:
+                raise ValueError(f"{child}: malformed frontmatter")
+
+            try:
+                meta = yaml.safe_load(parts[1]) or {}
+            except yaml.YAMLError as exc:
+                raise ValueError(f"{child}: bad YAML: {exc}") from exc
+
+            if not isinstance(meta, dict) or not meta.get("name"):
+                raise ValueError(f"{child}: frontmatter needs a `name`")
+
+            name = str(meta["name"])
+
+            if name in skills:
+                raise ValueError(f"duplicate skill name: {name}")
+
+            skills[name] = {
+                "metadata": "\n".join(f"{k}: {v}" for k, v in meta.items()),
+                "content": parts[2].strip(),    # 完整正文
+            }
+
+        return skills
+
 
     def query_language_model(self) -> dict[str, Any]:
         """Send one tool-enabled Chat Completions request and normalize it."""
@@ -227,7 +274,18 @@ class Agent:
 
         # You want to be careful about which attributes of the class you modify
         # here as they may also be handled by the subclasses.
-        raise NotImplementedError
+        messages_head: list[dict[str, Any]] = [
+            {
+                "role": "system", 
+                "content": self.system_prompt
+            },
+            {
+                "role": "user", 
+                "content": self.task_prompt
+            }
+        ]
+        return messages_head + self.messages
+        
 
     def estimate_active_prompt_tokens(self) -> int:
         """Estimate the next prompt, calibrated by the provider's latest usage."""
@@ -325,13 +383,32 @@ class Agent:
             # step. Ensure you identify when the agent has completed the task
             # by setting `Agent.finished`. If the agent exceeds the
             # `step_limit`, raise `StepLimitError`.
+            while not self.finished:
+                if self.steps_taken >= self.step_limit:
+                    raise StepLimitError
 
-            # TODO(2.2) Call `maybe_compact_context()` before each new action
-            # request in your shared loop. It already estimates active tokens
-            # and handles the threshold, and tracks compaction events for
-            # logging.
+                # TODO(2.2) Call `maybe_compact_context()` before each new action
+                # request in your shared loop. It already estimates active tokens
+                # and handles the threshold, and tracks compaction events for
+                # logging.
+                self.maybe_compact_context()    # 视情况压缩上下文
 
-            raise NotImplementedError
+                message = self.query_language_model()   # step_taken + 1 here
+                self.messages.append(message)   # 追加最新 Response
+
+                # (可能的) 调用工具
+                tools_call = message.get('tool_calls')
+                if tools_call:
+                    obj = self.execute_tool_calls(tools_call)
+                    self.messages.extend(obj)
+                else:
+                    self.messages.append(
+                        {
+                            "role": "user",
+                            "content": "If you are finished, finish via the appropriate completion tool; otherwise take your next action with a tool call if necessary."
+                        }
+                    )
+
         finally:
             # This block is provided infrastructure. Do not modify it: a
             # trajectory is required even when a run fails.
