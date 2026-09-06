@@ -1,0 +1,18 @@
+diff --git a/src/chess_app/game.py b/src/chess_app/game.py
+index f153e00..33262d3 100644
+--- a/src/chess_app/game.py
++++ b/src/chess_app/game.py
+@@ -75,9 +75,10 @@ class ChessGame:
+             human_state = self._state_unlocked()
+ 
+             engine_move: str | None = None
+-            reply = self._choose_engine_move()
+-            engine_move = reply.uci()
+-            self._record_and_push(reply)
++            if self._board.outcome(claim_draw=True) is None:
++                reply = self._choose_engine_move()
++                engine_move = reply.uci()
++                self._record_and_push(reply)
+ 
+             state = self._state_unlocked()
+             state["human_move"] = move.uci()
