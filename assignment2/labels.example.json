@@ -1,0 +1,26 @@
+{
+  "labels": [
+    {
+      "run_id": "example__qwen",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "The task requested vertical bars but the figure uses a line."
+        }
+      ]
+    },
+    {
+      "run_id": "example__ministral",
+      "errors": [
+        {
+          "family": "execution_failure",
+          "evidence": "The program raised an exception and no figure.png was produced."
+        }
+      ]
+    },
+    {
+      "run_id": "example__glm",
+      "errors": []
+    }
+  ]
+}

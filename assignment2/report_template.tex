@@ -1,0 +1,106 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+\title{11-768 HW2: Evaluating a Data-Visualization Agent}
+\author{Your Name}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Part 1: Examine Seed Agent Runs}
+
+\subsection{Comparison of Ground-Truth and Validator Labels}
+Summarize how the baseline validator's predictions compare with the provided
+human labels on the seed runs. Report all four per-family MCC scores and macro-MCC, and describe
+where the disagreements concentrate.
+
+\subsection{Validator Error Type 1}
+Describe the first recurring type of validator error. Cite the run IDs of at
+least two runs that exhibit it, and explain why the baseline validator failed
+on them. Ground the analysis in specific evidence from the task, trajectory,
+input data, or figure.
+
+\subsection{Validator Error Type 2}
+Describe the second recurring type of validator error. Cite the run IDs of at
+least two runs that exhibit it, and explain why the baseline validator failed
+on them. Ground the analysis in specific evidence from the task, trajectory,
+input data, or figure.
+
+\subsection{Proposed Validator Changes}
+For each error type above, propose a targeted change to the validator that
+might catch that class of error.
+
+\section{Part 2: Improve Your Validator}
+
+\subsection{Implemented Changes}
+Describe the two changes implemented from Part 1. Distinguish deterministic
+checks from model-based checks, where applicable, and explain how each change
+uses the task, trajectory, input data, or rendered figure.
+
+\subsection{Seed-Set Performance vs.\ Baseline}
+Report the modified validator's performance on the seed runs alongside the
+baseline using all four per-family MCC scores and macro-MCC.
+
+\subsection{Qualitative Analysis of Targeted Error Types}
+For each of the two error types surfaced in Part 1, discuss whether the
+corresponding change actually mitigated it, with reference to specific runs.
+Also describe any regressions.
+
+\section{Part 3: Design New Evaluation Tasks}
+
+\subsection{Anticipated Generalization Weaknesses}
+Identify two classes of visualization task that your current validator may
+have trouble generalizing to, and explain why.
+
+\subsection{Task Design}
+Describe the five visualization tasks, including at least two from each
+weakness class. For each task, describe its inputs and data source, expected
+behavior, and why it is a useful stress test for the validator.
+
+\subsection{Agent Runs and Labeling}
+Describe the agents run on the new tasks, the runs generated, and how you
+assigned human labels using the four fixed error families. Explain any
+ambiguous labeling decisions.
+
+\subsection{Validator Performance on New Tasks}
+Report all four per-family MCC scores and macro-MCC on the new agent runs and qualitatively
+analyze important successes, failures, and uncertain labels.
+
+\subsection{Harbor Packaging}
+State that every authored task scores 1.0 against \texttt{-a oracle}; you may
+also report the recommended \texttt{-a nop} runs. Describe both plausible-but-wrong
+mutant solutions and report each reward. For the mutant scoring 0, explain what
+it gets wrong and name the assertion that rejects it. For the mutant scoring
+1.0, explain what it gets wrong and why the verifier accepts it. Then, for each
+of the four error families, say whether a deterministic Harbor verifier for your
+task could decide it, and why or why not. Finally: your validator is graded on
+private runs for tasks you never authored. Explain why a per-task verifier
+cannot serve as that grading mechanism.
+
+\section{Part 4: Iterate on Your Design}
+
+\subsection{Additional Improvement Motivated by Part 3}
+Describe at least one change to the validator motivated by the Part 3 results.
+Identify the observed failure that motivated it and explain why you expected
+the change to help.
+
+\subsection{Final Evaluation on Seed and New Tasks}
+Evaluate the final validator on both the seed runs and self-authored runs.
+Report all four per-family MCC scores and macro-MCC before and after the change on each subset,
+including any regressions.
+
+\subsection{Qualitative Analysis of Self-Authored Tasks}
+Discuss whether the change improved performance on your self-authored tasks,
+with reference to specific runs.
+
+\subsection{Further Changes}
+Report any additional validator changes or tasks beyond the required ones.
+For each, explain its motivation and how successful you judged it to be,
+qualitatively and, for quantitative comparisons, using all four per-family MCC
+scores and macro-MCC.
+
+\end{document}

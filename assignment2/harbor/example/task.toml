@@ -1,0 +1,105 @@
+# ============================================================================
+# harbor task definition -- the worked example.
+#
+# Every key below is here for a reason; the comments say which. Three of them
+# are traps that cost staff real time, and they are called out inline:
+#   (T1) authors must be [[task.authors]] TABLES, not a list of strings
+#   (T2) [verifier].collect, if you ever add it, is a list of SHELL COMMANDS
+#   (T3) an invalid task.toml is reported as "no task found", never as
+#        "invalid task" -- so a typo here looks like a missing directory
+# ============================================================================
+schema_version = "1.4"
+
+# Pulled out of the container so a human can look at what the agent actually
+# produced next to the verifier's verdict. Top-level keys must come before any
+# [table], so this stays at the top of the file.
+#
+# These are collected at the END OF THE AGENT PHASE, before the verifier runs.
+# So do NOT list verifier outputs here: "/logs/verifier/pytest.log" does not
+# exist yet at collection time and lands in artifacts/manifest.json as
+# "status": "failed" on every single run. You do not need it here anyway --
+# harbor saves the verifier's own logs separately, at
+# jobs/<job-name>/<trial>/verifier/pytest.log.
+artifacts = [
+  "/app/figure.png",
+  "/app/plot.py",
+  "/app/plotted_values.json",
+]
+
+[task]
+name = "cmu-11768/viz-csv-harvest-yield"
+version = "1.0.0"
+description = "Aggregate a synthetic harvest CSV (filter, derive, group) and draw the resulting bar chart with matplotlib."
+keywords = ["visualization", "matplotlib", "data-analysis", "csv"]
+
+# (T1) THE TRAP: `authors = ["11-768 staff"]` parses as valid TOML and then
+# fails pydantic validation inside harbor. Task.is_valid_dir() swallows the
+# error, so harbor reports `ValueError: Either datasets or tasks must be
+# provided` -- i.e. "no task found here" -- and you go looking for a path bug
+# that does not exist. Authors are tables. Always.
+[[task.authors]]
+name = "11-768 staff"
+
+# Free-form; harbor does not interpret this. Used here to record where the data
+# came from, which in this case is nowhere: it was made up for the example.
+[metadata]
+task_class = "csv_aggregation_bar"
+chart_family = "bar"
+difficulty = "hard"
+# DO NOT re-point this at a real course task. The numbers in
+# environment/harvest_log.csv are invented for this example and describe a
+# fictional floating orchard; they come from no dataset, public or private.
+# That is deliberate: this example ships to students complete with its answer
+# key (tests/test_state.py) and a full working solution (solution/solve.sh), so
+# any real input file used here would be published along with its answer. The
+# corpus gets re-split, and a file that is public today can be graded privately
+# tomorrow; synthetic data cannot leak whichever way a future split falls.
+input_source = "synthetic; invented for this worked example (sha256 1cc30e44122bfccab866600d162712bf37471b835d05c4419c4af0f45a880615)"
+seed_runs = "none -- this example is not derived from any recorded run"
+
+[verifier]
+# Wall clock for tests/test.sh. This verifier re-executes the agent's script
+# twice, so it is far slower than a plain pytest run: about 3 seconds for a
+# correct solution, and at worst 2 x REEXEC_TIMEOUT (120s each, set in
+# tests/test_state.py) for a script that hangs. Keep that worst case well
+# under this number. If the two budgets meet, a slow solution stops being a
+# clean 0 and becomes harbor's own VerifierTimeoutError, ten minutes later.
+#
+# (T2) DO NOT add `collect = ["figure.png"]` here expecting it to copy files
+# out. `[verifier].collect` is a list of SHELL COMMANDS, and passing filenames
+# makes the whole task un-loadable via the (T3) failure mode above. To retrieve
+# files, use the top-level `artifacts` list instead, as this task does.
+timeout_sec = 600.0
+
+[verifier.env]
+
+[agent]
+# Note the asymmetry with the verifier's timeout: the agent gets longer than
+# the verifier does. `harbor init` writes 600.0 here; that is a default, not a
+# recommendation. Pick a number deliberately rather than inheriting one -- long
+# enough for an honest attempt, short enough that a stuck agent is not billed.
+timeout_sec = 900.0
+
+[environment]
+# Grading must not depend on the network being up, or on a package index still
+# serving the versions you tested against. Everything -- the plotting stack AND
+# the test toolchain -- is baked into environment/Dockerfile instead.
+#
+# Consequence worth knowing before someone "fixes" it: harbor's default review
+# rubric includes a `test_deps_in_image` criterion that wants test-only deps
+# installed by tests/test.sh at run time. That criterion structurally conflicts
+# with no-network. This task is correct as written; the rubric item is the
+# thing that does not apply.
+network_mode = "no-network"
+build_timeout_sec = 900.0
+os = "linux"
+cpus = 1
+memory_mb = 2048
+mcp_servers = []
+
+[environment.env]
+# Headless rendering. There is no display in the container, and without this
+# matplotlib picks an interactive backend and dies on import for some agents.
+MPLBACKEND = "Agg"
+
+[solution.env]
