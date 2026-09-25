@@ -1,0 +1,1126 @@
+{
+  "labels": [
+    {
+      "run_id": "001",
+      "errors": [
+        {
+          "family": "execution_failure",
+          "evidence": "no figure went through Matplotlib, so nothing about one can be read"
+        }
+      ]
+    },
+    {
+      "run_id": "004",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "the x axis of axes 3 is 'linear'; the request asks for 'log'"
+        },
+        {
+          "family": "wrong_data",
+          "evidence": "panel 4 omits the cubing step, so its values are orders of magnitude off"
+        }
+      ]
+    },
+    {
+      "run_id": "008",
+      "errors": [
+        {
+          "family": "hard_to_read",
+          "evidence": "the value labels are drawn in near-white grey (#f4f4f4) on a white background and cannot be read"
+        },
+        {
+          "family": "wrong_data",
+          "evidence": "the requested series 'orange (source node)' is not plotted"
+        }
+      ]
+    },
+    {
+      "run_id": "009",
+      "errors": [
+        {
+          "family": "hard_to_read",
+          "evidence": "the x tick labels overlap each other and cannot be read"
+        },
+        {
+          "family": "wrong_chart",
+          "evidence": "the instructions ask for x tick labels rotated by 30 degrees, but they are horizontal"
+        }
+      ]
+    },
+    {
+      "run_id": "010",
+      "errors": [
+        {
+          "family": "execution_failure",
+          "evidence": "no figure went through Matplotlib, so nothing about one can be read"
+        }
+      ]
+    },
+    {
+      "run_id": "013",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "(1) the instructions forbid jet/rainbow/hsv, but the figure uses rainbow (2) the instructions set the x limits to 0..20, but the axis runs from -5 to 25"
+        }
+      ]
+    },
+    {
+      "run_id": "016",
+      "errors": [
+        {
+          "family": "wrong_data",
+          "evidence": "the instructions ask for dropping versions with a share below 0.5%; the plotted data ignores it (versions such as IE 9.0 (0.44%), UC Browser 7.0 (0.36%) and Chrome 65.0 (0.25%) are drawn)"
+        },
+        {
+          "family": "wrong_chart",
+          "evidence": "the instructions ask for a legend, but the figure has none"
+        }
+      ]
+    },
+    {
+      "run_id": "021",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "axes 0 is missing xlabel"
+        }
+      ]
+    },
+    {
+      "run_id": "022",
+      "errors": []
+    },
+    {
+      "run_id": "023",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "(1) the instructions ask for circular markers on the original data points, but no markers are drawn (2) the instructions ask for a 2x1 grid, but the figure has 2 panels"
+        }
+      ]
+    },
+    {
+      "run_id": "025",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "(1) The request names a colour for each of the five regions and asks the legend to show that coding, but every wedge is drawn in the same grey and the legend is an empty box with no entries. (2) The request asks for the chart to be structured on the hierarchy of Major Area, Regions and Country, but only one ring of country wedges is drawn, with no ring for either level above it. (3) The request asks for the image to be saved with dimensions of 1000x1000 pixels, but figure.png is 3000x3000."
+        },
+        {
+          "family": "wrong_data",
+          "evidence": "The request asks for the Overall score column to provide the value of each segment, but every wedge spans the same radius, so the scores are not encoded in the figure at all."
+        },
+        {
+          "family": "hard_to_read",
+          "evidence": "The country codes around the top of the circle overprint one another into an illegible run such as 'YEMZMBWEHDG', and the numeric labels inside the ring collapse into an unreadable band of overlapping digits."
+        }
+      ]
+    },
+    {
+      "run_id": "026",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "(1) The request asks for a sunburst chart with a hollow centre, but the figure draws plain filled concentric circles with no ring segments and no hole in the middle. (2) The request asks for the image to be saved at 1000x1000 pixels, but figure.png is 794x860."
+        },
+        {
+          "family": "wrong_data",
+          "evidence": "None of the requested hierarchy is encoded: there are no wedges for 'Major Area', 'Regions' or 'Country' and the 'Overall score' values are not used to size anything, and the five region colours named in the request appear only in the legend and not in the chart, which is uniformly grey."
+        },
+        {
+          "family": "hard_to_read",
+          "evidence": "All of the area labels are printed on top of one another at the centre of the circle, producing an unreadable overstruck blob (\"/CAfricàas\")."
+        }
+      ]
+    },
+    {
+      "run_id": "028",
+      "errors": [
+        {
+          "family": "wrong_data",
+          "evidence": "the instructions ask for the blue curve to connect the points of the year 2015; the plotted data ignores it (the curve connects the 2014 points instead)"
+        },
+        {
+          "family": "wrong_chart",
+          "evidence": "the instructions ask for a legend, but the figure has none"
+        }
+      ]
+    },
+    {
+      "run_id": "029",
+      "errors": [
+        {
+          "family": "wrong_data",
+          "evidence": "The request says each subplot should demonstrate all three distribution types, but every subplot plots only a single CDF (Normal, Laplacian or Cauchy), so two of the three requested curves are missing from each panel."
+        }
+      ]
+    },
+    {
+      "run_id": "030",
+      "errors": [
+        {
+          "family": "hard_to_read",
+          "evidence": "the series 'z against -w (white)' is drawn in the background colour and is invisible"
+        },
+        {
+          "family": "wrong_chart",
+          "evidence": "the instructions ask for the exact text 'Sharing x per column, y per row'; the figure shows 'Shared axes' instead"
+        }
+      ]
+    },
+    {
+      "run_id": "031",
+      "errors": []
+    },
+    {
+      "run_id": "034",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "(1) the instructions ask for the y ticks to be removed, but y tick labels are drawn (2) the instructions ask for a title, but the figure has none"
+        }
+      ]
+    },
+    {
+      "run_id": "038",
+      "errors": [
+        {
+          "family": "hard_to_read",
+          "evidence": "the series 'Non-smoker' is drawn in the background colour and is invisible"
+        },
+        {
+          "family": "wrong_chart",
+          "evidence": "the instructions ask for x tick labels rotated by 30 degrees, but they are horizontal"
+        }
+      ]
+    },
+    {
+      "run_id": "039",
+      "errors": [
+        {
+          "family": "wrong_data",
+          "evidence": "The requested relation is y=x across longitudes from -180 to 180, but the script clips all latitude values to [-80, 80] before applying the Mercator transform. This produces constant horizontal segments for longitudes outside that interval instead of preserving y=x."
+        },
+        {
+          "family": "wrong_chart",
+          "evidence": "The request explicitly asks for the y-axis label 'Latitude', but the figure labels it 'Latitude (Mercator)'."
+        }
+      ]
+    },
+    {
+      "run_id": "046",
+      "errors": [
+        {
+          "family": "hard_to_read",
+          "evidence": "the top of the chain is cut off by the top edge of the saved image: the segments labelled 33 and 34 and their labels are only partly visible"
+        },
+        {
+          "family": "wrong_chart",
+          "evidence": "(1) the instructions ask for 120 dpi, but the figure was saved at 100 dpi (2) the title lands entirely outside the saved image, so the figure shows no title although the instructions ask for one"
+        }
+      ]
+    },
+    {
+      "run_id": "047",
+      "errors": [
+        {
+          "family": "wrong_data",
+          "evidence": "missing categories"
+        },
+        {
+          "family": "wrong_chart",
+          "evidence": "missing stacked bars, etc."
+        }
+      ]
+    },
+    {
+      "run_id": "050",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "The request asks for a Sankey diagram, but the figure is a box-and-arrow flowchart of six grey/blue rectangles whose connectors are near-invisible hairlines, so flow magnitude is not encoded by path width or orientation at all."
+        },
+        {
+          "family": "wrong_data",
+          "evidence": "The request lists six flow values (100%, 20%, 20%, 20%, 20% and 10%), but only five transitions are drawn and labelled (100%, 20%, 20%, 20%, 20%); the 10% value never appears in the figure."
+        }
+      ]
+    },
+    {
+      "run_id": "051",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "(1) the instructions forbid jet/rainbow/hsv, but the figure uses jet (2) the instructions ask for the exact text 'Varying Density'; the figure shows 'Varying density' instead"
+        }
+      ]
+    },
+    {
+      "run_id": "052",
+      "errors": [
+        {
+          "family": "hard_to_read",
+          "evidence": "(1) the series 'Sharp interface' is drawn in the background colour and is invisible (2) the annotations are drawn on top of each other and cannot be read"
+        },
+        {
+          "family": "wrong_chart",
+          "evidence": "the green series was required vertical and is drawn horizontal"
+        }
+      ]
+    },
+    {
+      "run_id": "053",
+      "errors": [
+        {
+          "family": "execution_failure",
+          "evidence": "the run saved no figure, so nothing about one can be read"
+        }
+      ]
+    },
+    {
+      "run_id": "055",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "annotation points at the wrong point"
+        }
+      ]
+    },
+    {
+      "run_id": "059",
+      "errors": [
+        {
+          "family": "hard_to_read",
+          "evidence": "the x tick labels overlap each other and cannot be read"
+        },
+        {
+          "family": "wrong_chart",
+          "evidence": "the instructions ask for x tick labels rotated by 45 degrees, but they are horizontal"
+        }
+      ]
+    },
+    {
+      "run_id": "060",
+      "errors": [
+        {
+          "family": "hard_to_read",
+          "evidence": "the annotations are drawn on top of each other and cannot be read"
+        },
+        {
+          "family": "wrong_chart",
+          "evidence": "the instructions ask for 120 dpi, but the figure was saved at 100 dpi"
+        }
+      ]
+    },
+    {
+      "run_id": "062",
+      "errors": []
+    },
+    {
+      "run_id": "065",
+      "errors": [
+        {
+          "family": "execution_failure",
+          "evidence": "no figure went through Matplotlib, so nothing about one can be read"
+        }
+      ]
+    },
+    {
+      "run_id": "068",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "(1) the instructions ask for a dotted y=x line, but it is drawn solid (2) the instructions set the x limits to -180..180, but the axis runs from -200 to 200"
+        }
+      ]
+    },
+    {
+      "run_id": "069",
+      "errors": [
+        {
+          "family": "wrong_data",
+          "evidence": "the instructions ask for treating 'NA' in the Regions column as a string (the North America region); the plotted data ignores it (the NA rows are read as missing values and dropped, so North America is absent)"
+        },
+        {
+          "family": "hard_to_read",
+          "evidence": "the value labels are drawn in light grey on a white background and cannot be read"
+        }
+      ]
+    },
+    {
+      "run_id": "070",
+      "errors": [
+        {
+          "family": "hard_to_read",
+          "evidence": "(1) the legend box sits on top of the plotted data (2) the series 'cos(y) + y' and 'cos(y) + y/3' share the same colour and line style and cannot be told apart"
+        }
+      ]
+    },
+    {
+      "run_id": "074",
+      "errors": [
+        {
+          "family": "hard_to_read",
+          "evidence": "(1) the ylabel 'sin(2πt)' falls 55% outside the figure (2) The legend in the upper right sits on top of the sin(2πt) curve: the peaks of its last two cycles pass behind the legend box and cannot be read."
+        }
+      ]
+    },
+    {
+      "run_id": "075",
+      "errors": [
+        {
+          "family": "hard_to_read",
+          "evidence": "the series 'g(s)' and 'g(s + 0.1)' share the same colour and line style and cannot be told apart"
+        },
+        {
+          "family": "wrong_chart",
+          "evidence": "the instructions ask for gridlines, but no grid is drawn"
+        }
+      ]
+    },
+    {
+      "run_id": "077",
+      "errors": [
+        {
+          "family": "wrong_data",
+          "evidence": "the line series 'Oroville' holds [1842.3, 1889.7, 1961.4, 2054.8, 2178.2, 2310.6, 2402.9, 2551.3, 2698.7, 2814.1, 2946.5, 3057.8, 3188.2, 3271.6, 3346.9, 3421.4, 3452.7, 3418.5, 3352.1, 3260.4, 3147.8, 3021.6, 2896.3, 2758.9, 2483.5, 2617.2]; the request asks for [1842.3, 1889.7, 1961.4, 2054.8, 2178.2, 2310.6, 2402.9, 2551.3, 2698.7, 2814.1, 2946.5, 3057.8, 3188.2, 3271.6, 3346.9, 3421.4, 3452.7, 3418.5, 3352.1, 3260.4, 3147.8, 3021.6, 2896.3, 2758.9, 2617.2, 2483.5]"
+        }
+      ]
+    },
+    {
+      "run_id": "079",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "The request asks for a filled 3D tricontour plot, but the figure shows a 2D contourf projected flat onto the floor of the 3D box at a fixed z offset, so the contour bands carry no height and the z axis from -4 to 4 is empty."
+        }
+      ]
+    },
+    {
+      "run_id": "080",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "values not annotated"
+        }
+      ]
+    },
+    {
+      "run_id": "081",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "(1) the instructions ask for a 3D plot, but the figure is two-dimensional (2) the instructions ask for a title, but the figure has none"
+        },
+        {
+          "family": "wrong_data",
+          "evidence": "the request asks for the whole 3D voxel cube; the 2D figure shows a single colour slice of the volume, so most of the requested data is not plotted"
+        }
+      ]
+    },
+    {
+      "run_id": "082",
+      "errors": []
+    },
+    {
+      "run_id": "083",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "(1) The request asks for font size 8.0 for all text, yet the tick labels are visibly larger than the 8 pt titles and axis labels because the rcParams font size was applied only after the axes were drawn. (2) The request asks the second-row gamma event plots to use a different line offset from the first row (for example 2), but both rows use lineoffsets=np.arange(...) with a spacing of 1, so only the colour and line length differ; the 80 gamma series are packed at the same spacing as the 8 series above."
+        }
+      ]
+    },
+    {
+      "run_id": "086",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "The request says each bar's face alpha and edge alpha must sum to 1, but in the right panel the edge takes the same alpha as the face (set_alpha is applied after set_edgecolor), so the faintest bars such as x=2 and x=5 have almost invisible outlines instead of nearly opaque ones."
+        },
+        {
+          "family": "hard_to_read",
+          "evidence": "several bars are pale with no edge and are effectively invisible against the white background"
+        }
+      ]
+    },
+    {
+      "run_id": "087",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "the instructions ask for a logarithmic y axis, but it is linear"
+        },
+        {
+          "family": "hard_to_read",
+          "evidence": "the series 'Normal' and 'Laplace' share the same colour and line style and cannot be told apart"
+        }
+      ]
+    },
+    {
+      "run_id": "089",
+      "errors": [
+        {
+          "family": "execution_failure",
+          "evidence": "no figure went through Matplotlib, so nothing about one can be read"
+        }
+      ]
+    },
+    {
+      "run_id": "090",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "axes 0 is missing xlabel"
+        }
+      ]
+    },
+    {
+      "run_id": "091",
+      "errors": [
+        {
+          "family": "hard_to_read",
+          "evidence": "the panels overlap each other"
+        },
+        {
+          "family": "wrong_chart",
+          "evidence": "the instructions ask for the top and right spines to be hidden, but they are drawn"
+        }
+      ]
+    },
+    {
+      "run_id": "096",
+      "errors": [
+        {
+          "family": "execution_failure",
+          "evidence": "The run ended without saving a figure."
+        }
+      ]
+    },
+    {
+      "run_id": "097",
+      "errors": []
+    },
+    {
+      "run_id": "098",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "the figure's axes are related as [None], with no twinx; two panels side by side are not one chart with two scales"
+        },
+        {
+          "family": "hard_to_read",
+          "evidence": "the second series is flattened to a straight line; its oscillation is not visible at all"
+        }
+      ]
+    },
+    {
+      "run_id": "099",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "(1) the instructions ask for the y ticks to be removed, but y tick labels are drawn (2) the instructions ask for gridlines, but no grid is drawn"
+        }
+      ]
+    },
+    {
+      "run_id": "103",
+      "errors": [
+        {
+          "family": "execution_failure",
+          "evidence": "no figure went through Matplotlib, so nothing about one can be read"
+        }
+      ]
+    },
+    {
+      "run_id": "104",
+      "errors": []
+    },
+    {
+      "run_id": "105",
+      "errors": []
+    },
+    {
+      "run_id": "106",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "(1) the instructions forbid jet/rainbow/hsv, but the figure uses jet (2) the instructions ask for a colorbar, but the figure has none"
+        }
+      ]
+    },
+    {
+      "run_id": "108",
+      "errors": []
+    },
+    {
+      "run_id": "111",
+      "errors": [
+        {
+          "family": "hard_to_read",
+          "evidence": "The x-axis tick labels for all 30 x values (0 to 29) are printed at every integer and run into each other along the rotated 3D axis, rendering as an unreadable string such as '910111213141516...'."
+        },
+        {
+          "family": "wrong_chart",
+          "evidence": "the z axis carries no label"
+        }
+      ]
+    },
+    {
+      "run_id": "112",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "(1) the instructions require the y axis to start at 0, but it starts at 1 (2) the instructions ask for a 7 by 6 inch figure, but it is 5 by 4 inches"
+        }
+      ]
+    },
+    {
+      "run_id": "115",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "(1) nothing marks (1, 38); the figure holds 8 artists that could have picked out a single point (2) nothing marks (2, 24); the figure holds 8 artists that could have picked out a single point (3) nothing marks (3, 32); the figure holds 8 artists that could have picked out a single point (4) nothing marks (4, 35); the figure holds 8 artists that could have picked out a single point"
+        }
+      ]
+    },
+    {
+      "run_id": "117",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "(1) the instructions ask for a 3D plot, but the figure is two-dimensional (2) the instructions ask for gridlines, but no grid is drawn"
+        },
+        {
+          "family": "wrong_data",
+          "evidence": "the requested 3D curve of (u, v, w) is drawn as a 2D plot of u against v only; the w component of the Rossler attractor is not plotted at all"
+        }
+      ]
+    },
+    {
+      "run_id": "124",
+      "errors": [
+        {
+          "family": "hard_to_read",
+          "evidence": "The radial tick labels are all drawn along the 180-degree spoke and collide into an illegible run of digits (\\\"2.001.751.501.251.000.750.500.25\\\")."
+        }
+      ]
+    },
+    {
+      "run_id": "125",
+      "errors": []
+    },
+    {
+      "run_id": "126",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "the instructions require the y axis to start at 0, but it starts at about -110"
+        },
+        {
+          "family": "wrong_data",
+          "evidence": "the series 'curve' is plotted as (x-4)(x-6)(x-8)+60, not the requested (x-4)(x-6)(x-8)+90"
+        }
+      ]
+    },
+    {
+      "run_id": "128",
+      "errors": [
+        {
+          "family": "wrong_data",
+          "evidence": "The request asks for four colour sets each drawn on its own y=k layer with 30 random y values, but all four sets are drawn at randomly scattered continuous y positions around zero and the bar heights are set to abs(y) rather than the random values themselves."
+        },
+        {
+          "family": "wrong_chart",
+          "evidence": "The y axis is ticked at every integer from -5 to 5 instead of only at the discrete layer values where data exists, as the request requires, and no distinct y=k layers are visible."
+        },
+        {
+          "family": "hard_to_read",
+          "evidence": "The bars from all four colour sets overlap and occlude one another in a dense jumble, and the z-axis label 'Z (Height)' is clipped off at the left edge of the image."
+        }
+      ]
+    },
+    {
+      "run_id": "129",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "the instructions ask for a pie chart, but the figure draws stacked horizontal bars"
+        },
+        {
+          "family": "wrong_data",
+          "evidence": "the requested series '2019 ring' is not plotted"
+        },
+        {
+          "family": "hard_to_read",
+          "evidence": "white value labels overflow their segments onto the white background"
+        }
+      ]
+    },
+    {
+      "run_id": "130",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "(1) the instructions ask for a perceptually uniform colormap, but the figure uses jet (2) the instructions ask for 120 dpi, but the figure was saved at 72 dpi"
+        }
+      ]
+    },
+    {
+      "run_id": "131",
+      "errors": [
+        {
+          "family": "hard_to_read",
+          "evidence": "the panels overlap each other"
+        },
+        {
+          "family": "wrong_chart",
+          "evidence": "the instructions ask for a 2x2 grid, but the figure has 4 panels"
+        }
+      ]
+    },
+    {
+      "run_id": "135",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "The request asks for the six categories to emanate from the central spine at angles, but the \"Pricing Strategy\" bone is drawn at 0 degrees lying directly on top of the black spine rather than branching off it."
+        },
+        {
+          "family": "hard_to_read",
+          "evidence": "Category labels are drawn on top of their own branch lines and the spine (\"Pricing Strategy\" is struck through by the black spine, \"Internal Processes\", \"Market Conditions\" and \"Marketing and Sales Strategy\" by their coloured branches), and cause labels collide with the dashed sub-branches and with each other (\"Inadequate Sales Training\" over the Marketing label, \"Poor After-Sales Support\" crossed by a dashed line)."
+        }
+      ]
+    },
+    {
+      "run_id": "136",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "The first bar's second segment starts at 128 with width 47 (ending at 175) as requested, but the x axis is limited to 150, so the blue segment is cut off at the right edge and its full width is not shown."
+        }
+      ]
+    },
+    {
+      "run_id": "141",
+      "errors": [
+        {
+          "family": "hard_to_read",
+          "evidence": "white on yellow"
+        }
+      ]
+    },
+    {
+      "run_id": "142",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "the instructions ask for horizontal bars, but the bars are vertical"
+        },
+        {
+          "family": "wrong_data",
+          "evidence": "the requested series 'Tennis' is not plotted"
+        }
+      ]
+    },
+    {
+      "run_id": "143",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "(1) the instructions ask for a logarithmic y axis, but it is linear (2) the instructions ask for a 2x2 grid, but the figure has 4 panels"
+        }
+      ]
+    },
+    {
+      "run_id": "145",
+      "errors": [
+        {
+          "family": "execution_failure",
+          "evidence": "no figure was saved"
+        }
+      ]
+    },
+    {
+      "run_id": "146",
+      "errors": [
+        {
+          "family": "hard_to_read",
+          "evidence": "Almost every category and cause label is rotated 120-300 degrees so the text is upside-down and mirrored, the \"Customer Service\" bone and its three causes are drawn straight along the spine and collide with the bold head label into an illegible black smear, and several labels run off the right edge."
+        },
+        {
+          "family": "wrong_chart",
+          "evidence": "The request asks for the six categories and their causes to be arranged at specific locations emanating from the central spine, but all six bones start from the single point (7.5, 0) at the head and the cause lines are drawn as detached parallel segments rather than branching off their category bone, so the diagram does not show which cause belongs to which category."
+        }
+      ]
+    },
+    {
+      "run_id": "150",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "The request asks for polygons filling under the 3D curves, coloured with a reversed plasma map. The figure shows the nine Gaussian curves, but no visible filled polygons: the attempted surfaces have zero width in the y direction, so they collapse onto the curves. The reversed plasma colours therefore do not produce the requested filled regions. In addition, the z axis is capped at 0.1, which clips the peaks of the curves for y=2 through y=7."
+        },
+        {
+          "family": "hard_to_read",
+          "evidence": "the legend covers the z-axis tick labels"
+        }
+      ]
+    },
+    {
+      "run_id": "153",
+      "errors": []
+    },
+    {
+      "run_id": "155",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "the instructions forbid jet/rainbow/hsv, but the figure uses jet"
+        },
+        {
+          "family": "wrong_data",
+          "evidence": "the series 'first surface z' is plotted as 2 * sin(v/2) * cos(u)... (the z values doubled), not the requested the given formula"
+        }
+      ]
+    },
+    {
+      "run_id": "156",
+      "errors": []
+    },
+    {
+      "run_id": "161",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "(1) the instructions ask for a twinx() secondary axis, but the series are drawn on one shared y axis (2) the instructions ask for a dotted sin series, but it is drawn solid"
+        },
+        {
+          "family": "hard_to_read",
+          "evidence": "on the shared log axis the sine collapses into flat-topped blocks with every negative half-cycle off the axes"
+        }
+      ]
+    },
+    {
+      "run_id": "163",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "nothing marks (1.6000000000000005, 0.0); the figure holds 2 artists that could have picked out a single point"
+        }
+      ]
+    },
+    {
+      "run_id": "164",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "the instructions require the x axis to start at 0, but it starts at 5"
+        },
+        {
+          "family": "wrong_data",
+          "evidence": "the plotted values segments (8, 46), (132, 15), (99, 22) with the green and red colours swapped are the requested values in a different order (requested (8, 46), (99, 22), (132, 15) coloured orange, green, red)"
+        }
+      ]
+    },
+    {
+      "run_id": "165",
+      "errors": []
+    },
+    {
+      "run_id": "166",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "(1) the instructions ask for the y ticks to be removed, but y tick labels are drawn (2) the instructions ask for a polar projection, but the axes are rectilinear"
+        }
+      ]
+    },
+    {
+      "run_id": "167",
+      "errors": []
+    },
+    {
+      "run_id": "168",
+      "errors": [
+        {
+          "family": "execution_failure",
+          "evidence": "the run saved no figure, so nothing about one can be read"
+        }
+      ]
+    },
+    {
+      "run_id": "169",
+      "errors": [
+        {
+          "family": "hard_to_read",
+          "evidence": "the panels overlap each other"
+        },
+        {
+          "family": "wrong_chart",
+          "evidence": "the instructions ask for a title, but the figure has none"
+        }
+      ]
+    },
+    {
+      "run_id": "170",
+      "errors": []
+    },
+    {
+      "run_id": "171",
+      "errors": [
+        {
+          "family": "execution_failure",
+          "evidence": "The run ended without saving a figure."
+        }
+      ]
+    },
+    {
+      "run_id": "173",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "The shaded region is the whole vertical band between z=3 and z=10 (ax.axvspan), not the area between the curve and the x-axis that the request asks for. The annotation also shows its own LaTeX source, '\\\\int_{3}^{10} [(z - 4)(z - 6)(z - 8) + 90] dz', instead of a rendered formula."
+        },
+        {
+          "family": "hard_to_read",
+          "evidence": "The annotation box sits on top of the curve between z=3 and z=10, so the middle section of the plotted line is hidden behind the text."
+        }
+      ]
+    },
+    {
+      "run_id": "175",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "(1) the instructions ask for a 3D plot, but the figure is two-dimensional (2) the instructions ask for an x axis label, but the x axis is unlabelled"
+        },
+        {
+          "family": "hard_to_read",
+          "evidence": "the legend covers the tops of bars, so their heights cannot be read"
+        }
+      ]
+    },
+    {
+      "run_id": "177",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "the instructions ask for a pie chart, but the figure draws a bar chart"
+        },
+        {
+          "family": "hard_to_read",
+          "evidence": "the legend box sits on top of the plotted data"
+        }
+      ]
+    },
+    {
+      "run_id": "180",
+      "errors": [
+        {
+          "family": "wrong_data",
+          "evidence": "The request says the points must span a full circle, but the interpolation grid is restricted to x and y in [0, 1.5], so only the first quadrant of the annulus is drawn, and the NaNs outside the data hull are replaced by the mean, producing the large flat orange sheet that is not real data."
+        },
+        {
+          "family": "wrong_chart",
+          "evidence": "A filled 3D tricontour was requested, but the script interpolates onto a regular grid and calls contourf, so the result is a rectangular gridded contour sheet rather than a tricontourf of the triangulated circular point set."
+        }
+      ]
+    },
+    {
+      "run_id": "181",
+      "errors": [
+        {
+          "family": "execution_failure",
+          "evidence": "no figure went through Matplotlib, so nothing about one can be read"
+        }
+      ]
+    },
+    {
+      "run_id": "183",
+      "errors": [
+        {
+          "family": "wrong_data",
+          "evidence": "the instructions ask for only Asian and European countries; the plotted data ignores it (the African countries are drawn as well)"
+        },
+        {
+          "family": "wrong_chart",
+          "evidence": "the instructions ask for a legend, but the figure has none"
+        }
+      ]
+    },
+    {
+      "run_id": "191",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "The request asks for a sunburst chart built on the Major Area / Regions / Country hierarchy with a hollow centre, but the figure is a flat rectangular treemap of country codes with no rings, no hollow centre and no visible Regions level."
+        },
+        {
+          "family": "hard_to_read",
+          "evidence": "The Europe and Africa blocks and their legend keys are drawn in exactly the same green, so the two regions the legend distinguishes cannot be told apart in the chart."
+        }
+      ]
+    },
+    {
+      "run_id": "195",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "The request asks for one 3D scatter with flat XY, ZX and YZ projections cast onto the planes below and beside the points in blue, red and green, but the figure instead shows four separate panels (a 3D scatter plus two 2D scatters and a second 3D axes) with every panel coloured by the viridis displacement colormap and no blue/red/green projections."
+        },
+        {
+          "family": "hard_to_read",
+          "evidence": "The panels overlap: the XY projection axes cut across the main 3D panel and clip its \"Power (kW)\" axis label, the marker sizes (displacement scaled by 0.5) are so large that the semi-transparent bubbles pile into opaque blobs, and the ZX panel carries a meaningless Engine Displacement axis spanning -0.04 to 0.04."
+        }
+      ]
+    },
+    {
+      "run_id": "196",
+      "errors": []
+    },
+    {
+      "run_id": "199",
+      "errors": []
+    },
+    {
+      "run_id": "200",
+      "errors": [
+        {
+          "family": "hard_to_read",
+          "evidence": "the series 'Group 2' is drawn in the background colour and is invisible"
+        },
+        {
+          "family": "wrong_chart",
+          "evidence": "the instructions require the y axis to start at 0, but it starts at 20"
+        }
+      ]
+    },
+    {
+      "run_id": "202",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "(1) the instructions ask for a y axis label, but the y axis is unlabelled (2) the instructions ask for gridlines, but no grid is drawn"
+        }
+      ]
+    },
+    {
+      "run_id": "203",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "(1) the instructions ask for a polar projection, but the axes are rectilinear (2) the instructions ask for a colorbar, but the figure has none"
+        }
+      ]
+    },
+    {
+      "run_id": "204",
+      "errors": [
+        {
+          "family": "wrong_data",
+          "evidence": "the line series holds [42.1, 55.4, 61.8, 49.7, 58.2]; the request asks for [42.1, 55.4, 61.8, 58.2, 49.7]"
+        }
+      ]
+    },
+    {
+      "run_id": "205",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "The request asks for a Sankey diagram, but the figure is a horizontal bar chart of the six flow values with thin annotation arrows, and those arrows run from each later phase back to the earlier one instead of representing the transition from one phase to the next."
+        },
+        {
+          "family": "hard_to_read",
+          "evidence": "The 'Hurray!' label and the blue bold 'Success!' text are printed on top of each other at the top-left of the figure, so both strings are illegible."
+        }
+      ]
+    },
+    {
+      "run_id": "206",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "The request asks for error bars at a frequency of 20 with limits defined by the two boolean conditions, but the code AND-ed both conditions to drop points instead of using them as upper/lower limit flags, so the figure shows symmetric x/y/z bars on only about two thirds of the every-20th points and no one-sided limit arrows."
+        }
+      ]
+    },
+    {
+      "run_id": "208",
+      "errors": [
+        {
+          "family": "execution_failure",
+          "evidence": "the run saved no figure, so nothing about one can be read"
+        }
+      ]
+    },
+    {
+      "run_id": "209",
+      "errors": [
+        {
+          "family": "hard_to_read",
+          "evidence": "The boxplots are filled opaque in the same blue and orange as the swarms, so the beeswarm points inside each interquartile range are almost indistinguishable from the box body, particularly the orange points on the orange box of Group 2."
+        }
+      ]
+    },
+    {
+      "run_id": "210",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "The request asks for 'u', 'v' and 'w' as the three axes, but only the 'u' and 'v' labels are rendered; the vertical axis shows its 0-40 ticks with no 'w' label anywhere in the image."
+        }
+      ]
+    },
+    {
+      "run_id": "212",
+      "errors": [
+        {
+          "family": "hard_to_read",
+          "evidence": "(1) the legend box sits on top of the plotted data (2) the series 'setosa' and 'versicolor' share the same colour and line style and cannot be told apart"
+        },
+        {
+          "family": "wrong_chart",
+          "evidence": "two groups are drawn in the same colour"
+        }
+      ]
+    },
+    {
+      "run_id": "213",
+      "errors": [
+        {
+          "family": "wrong_data",
+          "evidence": "the instructions ask for the Women's column to be visualised; the plotted data ignores it (the Men's column is plotted instead)"
+        },
+        {
+          "family": "wrong_chart",
+          "evidence": "the instructions ask for a dashed quartile lines, but it is drawn solid"
+        },
+        {
+          "family": "hard_to_read",
+          "evidence": "the quartile captions collide into a single unreadable string"
+        }
+      ]
+    },
+    {
+      "run_id": "214",
+      "errors": [
+        {
+          "family": "wrong_chart",
+          "evidence": "(1) the instructions ask for circular markers on the frequency lines, but no markers are drawn (2) the instructions ask for the y ticks to be removed, but y tick labels are drawn"
+        }
+      ]
+    },
+    {
+      "run_id": "216",
+      "errors": [
+        {
+          "family": "wrong_data",
+          "evidence": "the bar series 'Agree' holds [62.0, 71.0, 28.0, 45.0]; the request asks for [62, 71, 45, 28]"
+        }
+      ]
+    }
+  ]
+}

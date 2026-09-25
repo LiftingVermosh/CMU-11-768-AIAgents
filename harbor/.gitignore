@@ -1,0 +1,11 @@
+# `harbor run` writes its output to ./jobs, relative to your CURRENT DIRECTORY
+# (--jobs-dir defaults to `jobs`), so running from this directory drops job
+# output right here. It contains full container artifacts and is not something
+# to commit. The repository root .gitignore does not cover it.
+jobs/
+
+# Scratch copies of a task made to run a mutant against it, if you make them
+# here rather than in /tmp. The mutants themselves live in
+# tasks/<task_id>/mutants/ and ARE part of your submission — do not ignore them.
+try/
+mut/

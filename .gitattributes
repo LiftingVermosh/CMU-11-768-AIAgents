@@ -1,0 +1,13 @@
+# Line endings.
+#
+# Git's `core.autocrlf=true` (the Windows default) rewrites text files to CRLF
+# on checkout. A CRLF `solve.sh` or `test.sh` cannot be executed inside the
+# Linux container harbor runs: bash reads `#!/bin/bash\r` as a request for an
+# interpreter named `bash\r`, the oracle exits 127, the verifier never runs and
+# no reward.txt is written. See harbor/TROUBLESHOOTING.md.
+* text=auto
+*.sh text eol=lf
+
+# The harbor example asserts the sha256 of its input CSV, so the working-tree
+# bytes have to match on every platform.
+*.csv text eol=lf

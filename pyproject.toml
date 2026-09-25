@@ -1,0 +1,25 @@
+[project]
+name = "hw2-validator"
+version = "0.1.0"
+description = "11-768 HW2: a validator for agentic data-visualization runs."
+requires-python = ">=3.12"
+dependencies = [
+    "matplotlib==3.10.5", # matches the visualization-agent execution environment
+    "modal==1.5.5",       # deploys student-owned development endpoints
+    "numpy==2.3.2",       # matches the visualization-agent execution environment
+    "pandas==2.3.1",      # matches the visualization-agent execution environment
+    "pillow==12.3.0",     # verifies that generated figure.png files are valid PNGs
+    "pydantic==2.13.5",   # the runner validates every prediction against prediction.py
+    "openai==2.54.0",     # calls the OpenAI-compatible validator endpoint;
+                          #   held below 3.0 because harbor -> litellm requires it
+    "harbor==0.23.0",     # packages authored tasks as evaluation environments
+    "python-dotenv==1.2.3", # loads endpoint settings from .env during development
+    "tqdm==4.67.3",         # displays progress while validators process runs
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["validator", "workflow"]
