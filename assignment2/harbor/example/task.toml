@@ -90,7 +90,15 @@ timeout_sec = 900.0
 # installed by tests/test.sh at run time. That criterion structurally conflicts
 # with no-network. This task is correct as written; the rubric item is the
 # thing that does not apply.
-network_mode = "no-network"
+#
+# LOCAL DEVIATION (2026-09-26): this was "no-network". Harbor's Docker provider
+# enforces no-network with an nftables egress sidecar whose ruleset uses
+# `fib daddr type local`, so it requires CONFIG_NFT_FIB_INET in the engine
+# host's kernel. This machine is WSL2, whose kernel does not set that option,
+# so harbor rejects the task before it starts. Nothing in this task touches the
+# network at run time, so the rewards are unchanged; only the hermeticity claim
+# is weakened. On a kernel with NFT_FIB_INET, revert this to "no-network".
+network_mode = "public"
 build_timeout_sec = 900.0
 os = "linux"
 cpus = 1
